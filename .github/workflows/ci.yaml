@@ -22,6 +22,6 @@ jobs:
       - run: npm run build
         env:
           VITE_SERVER_ENTRY: ./app/entrypoint.local.ts
-      - run: npm run build
-        env:
-          VITE_SERVER_ENTRY: ./app/entrypoint.lambda.ts
+      - run: npm run package
+      - run: unzip -l lambda.zip
+      - run: unzip -t lambda.zip
