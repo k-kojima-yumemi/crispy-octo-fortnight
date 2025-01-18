@@ -4,13 +4,20 @@ on:
   push:
     branches:
       - main
+    paths:
+      - application
   pull_request:
     branches:
       - main
+    paths:
+      - application
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: application
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
