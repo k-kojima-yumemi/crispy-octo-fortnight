@@ -19,3 +19,9 @@ jobs:
       - run: npm ci
       - run: npm run ci
       - run: npm run build
+      - run: npm run build
+        env:
+          VITE_SERVER_ENTRY: ./app/entrypoint.local.ts
+      - run: npm run build
+        env:
+          VITE_SERVER_ENTRY: ./app/entrypoint.lambda.ts
