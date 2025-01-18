@@ -1,6 +1,6 @@
 import { useState } from "hono/jsx";
 import type { FC } from "hono/jsx";
-import { daysClient } from "../client/apiClient";
+import { daysClient } from "../api/client";
 import { range } from "../util";
 
 export const BirthdayForm: FC = () => {
