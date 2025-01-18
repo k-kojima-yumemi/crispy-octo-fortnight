@@ -2,6 +2,7 @@ import { useRef, useState } from "hono/jsx";
 import type { FC } from "hono/jsx";
 import { daysClient } from "../api/client";
 import { range } from "../util";
+import { DateFormat } from "./DateFormat";
 
 export const BirthdayForm: FC = () => {
     const [selectedMonth, setSelectedMonth] = useState<string>("");
@@ -142,10 +143,12 @@ export const BirthdayForm: FC = () => {
             >
                 <div class="grid-row gap-4">
                     <h2 class="text-xl font-bold">確認</h2>
-                    <p>
-                        {selectedMonth}月{selectedDay}
-                        日の誕生日までの日数を計算します。
-                    </p>
+                    <DateFormat
+                        month={Number(selectedMonth)}
+                        day={Number(selectedDay)}
+                        style={{ month: "long", day: "numeric" }}
+                    />
+                    <p>の誕生日までの日数を計算します。</p>
                     <div class="flex justify-end gap-4">
                         <button
                             type="button"

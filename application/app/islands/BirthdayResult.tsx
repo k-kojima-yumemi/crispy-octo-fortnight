@@ -1,6 +1,7 @@
 import { useEffect, useState } from "hono/jsx";
 import type { FC } from "hono/jsx";
 import { calculateClient } from "../api/client";
+import { DateFormat } from "./DateFormat";
 
 type Props = {
     month: number;
@@ -9,7 +10,7 @@ type Props = {
 
 export const BirthdayResult: FC<Props> = ({ month, day }) => {
     const [result, setResult] = useState<string>("");
-    const [nextBirthday, setNextBirthday] = useState<string>("");
+    const [nextBirthday, setNextBirthday] = useState<Date>();
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -26,12 +27,7 @@ export const BirthdayResult: FC<Props> = ({ month, day }) => {
                 setResult(
                     `次の誕生日まであと${data.daysUntilBirthday}日です！`,
                 );
-                const nextBirthday = new Date(data.nextBirthday);
-                setNextBirthday(
-                    `${nextBirthday.toLocaleDateString(undefined, {
-                        dateStyle: "long",
-                    })} (${nextBirthday.toLocaleString(undefined, { weekday: "short" })})`,
-                );
+                setNextBirthday( new Date(data.nextBirthday));
             } catch (error) {
                 setResult(
                     error instanceof Error
@@ -46,13 +42,19 @@ export const BirthdayResult: FC<Props> = ({ month, day }) => {
         calculateBirthday();
     }, [month, day]);
 
+
     return (
         <div class="grid-row gap-4">
             {isLoading ? (
                 <div class="text-gray-600">計算中...</div>
             ) : (
                 <>
-                    <div class="text-xl font-medium">{nextBirthday}</div>
+                    <DateFormat
+                        year={nextBirthday?.getFullYear()}
+                        month={nextBirthday?.getMonth() || 0 + 1}
+                        day={nextBirthday?.getDate() || 0}
+                        style={{ dateStyle: "full" }}
+                    />
                     <div
                         class={`text-2xl font-bold ${result.includes("エラー") ? "text-red-600" : "text-indigo-600"}`}
                     >
