@@ -5,12 +5,14 @@ on:
     branches:
       - main
     paths:
-      - application
+      - application/**
+      - .github/workflows/ci.yaml
   pull_request:
     branches:
       - main
     paths:
-      - application
+      - application/**
+      - .github/workflows/ci.yaml
 
 jobs:
   build:
