@@ -2,6 +2,8 @@ import honox from "honox/vite";
 import client from "honox/vite/client";
 import { defineConfig } from "vite";
 
+const serverEntry = process.env.VITE_SERVER_ENTRY ?? "./app/server.ts";
+
 export default defineConfig(({ mode }) => {
     if (mode === "client") {
         return {
@@ -16,10 +18,7 @@ export default defineConfig(({ mode }) => {
     return {
         build: {
             emptyOutDir: false,
-            ssr: true,
-            rollupOptions: {
-                input: "./app/server.ts",
-            },
+            ssr: serverEntry,
         },
         plugins: [honox({})],
     };
