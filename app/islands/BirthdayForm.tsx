@@ -1,4 +1,4 @@
-import { useState, useRef } from "hono/jsx";
+import { useRef, useState } from "hono/jsx";
 import type { FC } from "hono/jsx";
 import { daysClient } from "../api/client";
 import { range } from "../util";
@@ -55,10 +55,10 @@ export const BirthdayForm: FC = () => {
         formRef.current?.submit();
     };
 
-    const handleDialogClick = (e: MouseEvent) => {
+    const handleDialogClick = (e: Event) => {
         const target = e.target as HTMLElement;
         if (target === dialogRef.current) {
-            dialogRef.current.close();
+            dialogRef.current?.close();
         }
     };
 
@@ -106,7 +106,9 @@ export const BirthdayForm: FC = () => {
                         name="day"
                         value={selectedDay}
                         onChange={(e) =>
-                            setSelectedDay((e.target as HTMLSelectElement).value)
+                            setSelectedDay(
+                                (e.target as HTMLSelectElement).value,
+                            )
                         }
                         disabled={!selectedMonth}
                         required
@@ -136,6 +138,7 @@ export const BirthdayForm: FC = () => {
             <dialog
                 ref={dialogRef}
                 onClick={handleDialogClick}
+                onKeyPress={handleDialogClick}
                 class="rounded-lg p-6 backdrop:bg-gray-500/50"
             >
                 <div class="space-y-4">
