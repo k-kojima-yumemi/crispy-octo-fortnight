@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --mode client && vite build",
     "format": "npx @biomejs/biome check --write --unsafe",
     "check": "tsc --noEmit",
     "ci": "npx @biomejs/biome ci && npm run check"
