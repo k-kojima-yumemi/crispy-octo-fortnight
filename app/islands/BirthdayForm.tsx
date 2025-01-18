@@ -1,6 +1,7 @@
 import { useState } from "hono/jsx";
 import type { FC } from "hono/jsx";
 import { daysClient } from "../client/apiClient";
+import { range } from "../util";
 
 export const BirthdayForm: FC = () => {
     const [selectedMonth, setSelectedMonth] = useState<string>("");
@@ -57,9 +58,9 @@ export const BirthdayForm: FC = () => {
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 >
                     <option value="">月を選択</option>
-                    {Array.from({ length: 12 }, (_, i) => (
-                        <option key={i + 1} value={i + 1}>
-                            {i + 1}月
+                    {Array.from(range(1, 13)).map((i) => (
+                        <option key={i} value={i}>
+                            {i}月
                         </option>
                     ))}
                 </select>
