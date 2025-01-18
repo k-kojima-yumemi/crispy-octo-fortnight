@@ -16,7 +16,7 @@ const days = new Hono().post("/", daysValidator, async (c) => {
     // 月の最終日を取得
     const lastDay = new Date(currentYear, month, 0).getDate();
 
-    return c.json({ days: [...range(1, lastDay)] });
+    return c.json({ days: [...range(1, lastDay + 1)] });
 });
 
 export type DaysApi = typeof days;
