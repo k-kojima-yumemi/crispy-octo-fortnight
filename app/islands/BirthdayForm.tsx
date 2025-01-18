@@ -1,6 +1,6 @@
 import { useState } from "hono/jsx";
 import type { FC } from "hono/jsx";
-import { daysClient } from "../api/client";
+import { daysClient } from "../client/apiClient";
 
 export const BirthdayForm: FC = () => {
     const [selectedMonth, setSelectedMonth] = useState<string>("");

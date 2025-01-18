@@ -1,6 +1,6 @@
 import { useEffect, useState } from "hono/jsx";
 import type { FC } from "hono/jsx";
-import { calculateClient } from "../api/client";
+import { calculateClient } from "../client/apiClient";
 
 type Props = {
     month: number;
