@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.grid-row {
+    @apply grid grid-flow-row auto-rows-auto;
+}

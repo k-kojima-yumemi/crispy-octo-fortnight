@@ -1,21 +1,18 @@
+import { zValidator } from "@hono/zod-validator";
 import { createRoute } from "honox/factory";
+import { z } from "zod";
 import { BirthdayResult } from "../islands/BirthdayResult";
 
-export const POST = createRoute(async (c) => {
-    const formData = await c.req.formData();
-    const month = Number.parseInt(formData.get("month") as string);
-    const day = Number.parseInt(formData.get("day") as string);
+const dateValidator = zValidator(
+    "form",
+    z.object({
+        month: z.coerce.number().min(1).max(12),
+        day: z.coerce.number().min(1).max(31),
+    }),
+);
 
-    if (
-        Number.isNaN(month) ||
-        Number.isNaN(day) ||
-        month < 1 ||
-        month > 12 ||
-        day < 1 ||
-        day > 31
-    ) {
-        return c.redirect("/");
-    }
+export const POST = createRoute(dateValidator, async (c) => {
+    const { month, day } = c.req.valid("form");
 
     return c.render(
         <div class="container mx-auto p-4">

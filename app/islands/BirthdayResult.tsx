@@ -47,12 +47,12 @@ export const BirthdayResult: FC<Props> = ({ month, day }) => {
     }, [month, day]);
 
     return (
-        <div class="text-center">
+        <div class="grid-row gap-4">
             {isLoading ? (
                 <div class="text-gray-600">計算中...</div>
             ) : (
                 <>
-                    <div class="text-xl font-medium mb-4">{nextBirthday}</div>
+                    <div class="text-xl font-medium">{nextBirthday}</div>
                     <div
                         class={`text-2xl font-bold ${result.includes("エラー") ? "text-red-600" : "text-indigo-600"}`}
                     >
@@ -60,10 +60,7 @@ export const BirthdayResult: FC<Props> = ({ month, day }) => {
                     </div>
                 </>
             )}
-            <a
-                href="/"
-                class="mt-8 inline-block text-indigo-600 hover:text-indigo-500"
-            >
+            <a href="/" class=" text-indigo-600 hover:text-indigo-500">
                 ← 戻る
             </a>
         </div>
