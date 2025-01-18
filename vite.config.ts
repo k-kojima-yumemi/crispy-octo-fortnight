@@ -2,5 +2,11 @@ import honox from "honox/vite";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-    plugins: [honox()],
+    plugins: [
+        honox({
+            client: {
+                input: ["./app/style.css"],
+            },
+        }),
+    ],
 });
