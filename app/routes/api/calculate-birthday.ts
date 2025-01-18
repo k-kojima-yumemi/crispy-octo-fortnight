@@ -27,7 +27,10 @@ const calculate = new Hono().post("/", dateValidator, async (c) => {
     const diffTime = birthday.getTime() - today.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    return c.json({ daysUntilBirthday: diffDays });
+    return c.json({
+        daysUntilBirthday: diffDays,
+        nextBirthday: birthday.toISOString(),
+    });
 });
 
 export type CalculateApi = typeof calculate;

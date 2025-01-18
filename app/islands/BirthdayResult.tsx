@@ -9,6 +9,7 @@ type Props = {
 
 export const BirthdayResult: FC<Props> = ({ month, day }) => {
     const [result, setResult] = useState<string>("");
+    const [nextBirthday, setNextBirthday] = useState<string>("");
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -24,6 +25,12 @@ export const BirthdayResult: FC<Props> = ({ month, day }) => {
                 const data = await response.json();
                 setResult(
                     `次の誕生日まであと${data.daysUntilBirthday}日です！`,
+                );
+                const nextBirthday = new Date(data.nextBirthday);
+                setNextBirthday(
+                    `${nextBirthday.toLocaleDateString(undefined, {
+                        dateStyle: "long",
+                    })} (${nextBirthday.toLocaleString(undefined, { weekday: "short" })})`,
                 );
             } catch (error) {
                 setResult(
@@ -41,17 +48,17 @@ export const BirthdayResult: FC<Props> = ({ month, day }) => {
 
     return (
         <div class="text-center">
-            <div class="text-xl font-medium mb-4">
-                {month}月{day}日の誕生日
-            </div>
             {isLoading ? (
                 <div class="text-gray-600">計算中...</div>
             ) : (
-                <div
-                    class={`text-2xl font-bold ${result.includes("エラー") ? "text-red-600" : "text-indigo-600"}`}
-                >
-                    {result}
-                </div>
+                <>
+                    <div class="text-xl font-medium mb-4">{nextBirthday}</div>
+                    <div
+                        class={`text-2xl font-bold ${result.includes("エラー") ? "text-red-600" : "text-indigo-600"}`}
+                    >
+                        {result}
+                    </div>
+                </>
             )}
             <a
                 href="/"
