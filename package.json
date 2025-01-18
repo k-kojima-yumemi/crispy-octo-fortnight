@@ -1,6 +1,17 @@
 {
   "volta": {
-    "node": "22.12.0",
+    "node": "22.13.0",
     "npm": "10.9.2"
+  },
+  "dependencies": {
+    "hono": "^4.6.16",
+    "honox": "^0.1.32"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@hono/vite-dev-server": "^0.18.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
   }
 }
