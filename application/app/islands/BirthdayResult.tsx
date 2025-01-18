@@ -27,7 +27,7 @@ export const BirthdayResult: FC<Props> = ({ month, day }) => {
                 setResult(
                     `次の誕生日まであと${data.daysUntilBirthday}日です！`,
                 );
-                setNextBirthday( new Date(data.nextBirthday));
+                setNextBirthday(new Date(data.nextBirthday));
             } catch (error) {
                 setResult(
                     error instanceof Error
@@ -41,7 +41,6 @@ export const BirthdayResult: FC<Props> = ({ month, day }) => {
 
         calculateBirthday();
     }, [month, day]);
-
 
     return (
         <div class="grid-row gap-4">

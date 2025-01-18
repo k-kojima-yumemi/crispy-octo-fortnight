@@ -14,7 +14,9 @@ export const DateFormat: FC<Props> = ({ year, month, day, style }) => {
     const timeZone = options.timeZone;
     return (
         <div class="flex flex-row gap-2 items-center">
-            <div class="text-xl font-medium">{date.toLocaleDateString(currentLocale, style)}</div>
+            <div class="text-xl font-medium">
+                {date.toLocaleDateString(currentLocale, style)}
+            </div>
             <div class="text-sm text-gray-500 flex flex-row gap-1 items-center">
                 <span class="after:content-[':']">Timezone</span>
                 <span>{timeZone}</span>
