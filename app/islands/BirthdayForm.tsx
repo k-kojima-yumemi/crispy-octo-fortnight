@@ -70,7 +70,7 @@ export const BirthdayForm: FC = () => {
                 action="/result"
                 class="space-y-4"
             >
-                <div>
+                <div class="flex flex-col gap-2">
                     <label
                         for="month"
                         class="block text-sm font-medium text-gray-700"
@@ -83,7 +83,7 @@ export const BirthdayForm: FC = () => {
                         value={selectedMonth}
                         onChange={handleMonthChange}
                         required
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:text-gray-500"
                     >
                         <option value="">月を選択</option>
                         {Array.from(range(1, 13)).map((i) => (
@@ -94,7 +94,7 @@ export const BirthdayForm: FC = () => {
                     </select>
                 </div>
 
-                <div>
+                <div class="flex flex-col gap-2">
                     <label
                         for="day"
                         class="block text-sm font-medium text-gray-700"
@@ -112,7 +112,7 @@ export const BirthdayForm: FC = () => {
                         }
                         disabled={!selectedMonth}
                         required
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:text-gray-500 disabled:cursor-not-allowed"
                     >
                         <option value="">日を選択</option>
                         {days.map((day) => (
