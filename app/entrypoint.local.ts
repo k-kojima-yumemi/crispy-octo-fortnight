@@ -5,7 +5,7 @@ import app from "./server";
 
 // static files
 app.use("/static/*", serveStatic({ root: "./" }));
-app.use("/favicon.ico", serveStatic({ root: "./" }));
+app.use("/favicon.ico", serveStatic({ path: "./favicon.ico" }));
 
 const appPort: number = Number.parseInt(env.APP_PORT ?? "8080");
 serve(
