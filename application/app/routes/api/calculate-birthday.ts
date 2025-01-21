@@ -25,7 +25,7 @@ const calculate = new Hono().post("/", dateValidator, async (c) => {
     })();
 
     // 日数の計算
-    const daysUntilBirthday = Math.ceil(birthday.diff(today, 'days').days);
+    const daysUntilBirthday = Math.ceil(birthday.diff(today, "days").days);
     const nextBirthday = birthday.toISO() || "";
 
     return c.json({
