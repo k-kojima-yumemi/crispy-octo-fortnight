@@ -1,7 +1,8 @@
 import { useEffect, useState } from "hono/jsx";
 import type { FC } from "hono/jsx";
-import { calculateClient } from "../api/client";
 import { DateFormat } from "./DateFormat";
+import { DateTime } from "luxon";
+import { calculateClient } from "../api/client";
 
 type Props = {
     month: number;
@@ -10,7 +11,7 @@ type Props = {
 
 export const BirthdayResult: FC<Props> = ({ month, day }) => {
     const [result, setResult] = useState<string>("");
-    const [nextBirthday, setNextBirthday] = useState<Date>();
+    const [nextBirthday, setNextBirthday] = useState<DateTime>();
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -27,7 +28,7 @@ export const BirthdayResult: FC<Props> = ({ month, day }) => {
                 setResult(
                     `次の誕生日まであと${data.daysUntilBirthday}日です！`,
                 );
-                setNextBirthday(new Date(data.nextBirthday));
+                setNextBirthday(DateTime.fromISO(data.nextBirthday || ""));
             } catch (error) {
                 setResult(
                     error instanceof Error
@@ -49,9 +50,9 @@ export const BirthdayResult: FC<Props> = ({ month, day }) => {
             ) : (
                 <>
                     <DateFormat
-                        year={nextBirthday?.getFullYear()}
-                        month={nextBirthday?.getMonth() || 0 + 1}
-                        day={nextBirthday?.getDate() || 0}
+                        year={nextBirthday?.year}
+                        month={nextBirthday?.month || 0}
+                        day={nextBirthday?.day || 0}
                         style={{ dateStyle: "full" }}
                     />
                     <div
@@ -61,7 +62,7 @@ export const BirthdayResult: FC<Props> = ({ month, day }) => {
                     </div>
                 </>
             )}
-            <a href="/" class=" text-indigo-600 hover:text-indigo-500">
+            <a href="/" class="text-indigo-600 hover:text-indigo-500">
                 ← 戻る
             </a>
         </div>

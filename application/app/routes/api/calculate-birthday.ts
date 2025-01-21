@@ -1,6 +1,8 @@
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
+import { DateTime } from "luxon";
 import { z } from "zod";
+
 const dateValidator = zValidator(
     "json",
     z.object({
@@ -11,25 +13,23 @@ const dateValidator = zValidator(
 
 const calculate = new Hono().post("/", dateValidator, async (c) => {
     const { month, day } = c.req.valid("json");
-
-    const today = new Date();
-    const currentYear = today.getFullYear();
+    const today = DateTime.now();
+    const currentYear = today.year;
 
     // 今年の誕生日
-    let birthday = new Date(currentYear, month - 1, day);
+    let birthday = DateTime.local(currentYear, month, day);
 
-    // 今年の誕生日が過ぎている場合は来年の誕生日を設定
-    if (today > birthday) {
-        birthday = new Date(currentYear + 1, month - 1, day);
+    // 誕生日が過ぎている場合は来年の誕生日を設定
+    if (birthday < today) {
+        birthday = DateTime.local(currentYear + 1, month, day);
     }
 
-    // 日数の計算（ミリ秒を日数に変換）
-    const diffTime = birthday.getTime() - today.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    // 日数の計算
+    const diffDays = Math.ceil(birthday.diff(today, 'days').days);
 
     return c.json({
         daysUntilBirthday: diffDays,
-        nextBirthday: birthday.toISOString(),
+        nextBirthday: birthday.toISO(),
     });
 });
 
