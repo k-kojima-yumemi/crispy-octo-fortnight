@@ -28,7 +28,7 @@ export const BirthdayResult: FC<Props> = ({ month, day }) => {
                 setResult(
                     `次の誕生日まであと${data.daysUntilBirthday}日です！`,
                 );
-                setNextBirthday(DateTime.fromISO(data.nextBirthday || ""));
+                setNextBirthday(DateTime.fromISO(data.nextBirthday));
             } catch (error) {
                 setResult(
                     error instanceof Error

@@ -16,20 +16,21 @@ const calculate = new Hono().post("/", dateValidator, async (c) => {
     const today = DateTime.now();
     const currentYear = today.year;
 
-    // 今年の誕生日
-    let birthday = DateTime.local(currentYear, month, day);
-
-    // 誕生日が過ぎている場合は来年の誕生日を設定
-    if (birthday < today) {
-        birthday = DateTime.local(currentYear + 1, month, day);
-    }
+    const birthday = (() => {
+        const thisYear = DateTime.local(currentYear, month, day);
+        if (thisYear < today) {
+            return DateTime.local(currentYear + 1, month, day);
+        }
+        return thisYear;
+    })();
 
     // 日数の計算
-    const diffDays = Math.ceil(birthday.diff(today, 'days').days);
+    const daysUntilBirthday = Math.ceil(birthday.diff(today, 'days').days);
+    const nextBirthday = birthday.toISO() || "";
 
     return c.json({
-        daysUntilBirthday: diffDays,
-        nextBirthday: birthday.toISO(),
+        daysUntilBirthday,
+        nextBirthday,
     });
 });
 
