@@ -7,11 +7,13 @@
   "dependencies": {
     "@hono/zod-validator": "^0.4.2",
     "hono": "^4.6.16",
-    "honox": "^0.1.32"
+    "honox": "^0.1.32",
+    "luxon": "^3.5.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@hono/vite-dev-server": "^0.18.1",
+    "@types/luxon": "^3.4.2",
     "@types/node": "^22.10.7",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.1",
