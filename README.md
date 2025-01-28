@@ -63,6 +63,8 @@ graph LR
 
 ## 必要なIAMロール
 
+下記には間違った情報が含まれます。鵜呑みにしないように。
+
 ### Lambda実行ロール
 - ロール名: `BirthdayAppLambdaRole`
 - 用途: Lambda関数の実行
