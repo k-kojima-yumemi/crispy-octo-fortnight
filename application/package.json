@@ -28,6 +28,6 @@
     "format": "npx @biomejs/biome check --write --unsafe",
     "check": "tsc --noEmit",
     "ci": "npx @biomejs/biome ci && npm run check",
-    "package": "VITE_SERVER_ENTRY=./app/entrypoint.lambda.ts npm run build && rm -f lambda.zip && cd dist && zip -r ../lambda.zip *.js"
+    "package": "VITE_SERVER_ENTRY=./app/entrypoint.lambda.ts npm run build && rm -f lambda.zip && cd dist && zip -r ../lambda.zip *.mjs"
   }
 }

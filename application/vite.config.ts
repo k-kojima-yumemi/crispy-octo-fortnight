@@ -19,6 +19,11 @@ export default defineConfig(({ mode }) => {
         build: {
             emptyOutDir: false,
             ssr: serverEntry,
+            rollupOptions: {
+                output: {
+                    entryFileNames: "entrypoint.mjs",
+                },
+            }
         },
         plugins: [honox({})],
     };
