@@ -4,6 +4,7 @@ import { showRoutes } from "hono/dev";
 import { createMiddleware } from "hono/factory";
 import { timing } from "hono/timing";
 import { createApp } from "honox/server";
+import { env } from 'hono/adapter'
 
 const withLogger = new Hono()
     .use(
@@ -25,7 +26,16 @@ const withLogger = new Hono()
             console.log(JSON.stringify(accessLog));
         }),
     )
-    .use(csrf())
+    .use(csrf({
+        origin: (originDomain, c) => {
+            const { ORIGIN } = env<{ ORIGIN: string }>(c)
+            console.log("Origin: ", ORIGIN, originDomain);
+            if (ORIGIN) {
+                return ORIGIN === originDomain
+            }
+            return /^http:\/\/localhost:\d+$/.test(originDomain);
+        }
+    }))
     .use(timing());
 
 const app = createApp({ app: withLogger });
