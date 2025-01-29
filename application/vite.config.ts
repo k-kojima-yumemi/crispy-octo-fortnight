@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
                 output: {
                     entryFileNames: "entrypoint.mjs",
                 },
-            }
+            },
         },
         plugins: [honox({})],
     };
